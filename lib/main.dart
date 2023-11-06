@@ -155,17 +155,14 @@ class MyHomePageState extends State<MyHomePage> {
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Text(title),
         ),
-        // Here we have initialized the stepper widget
         body: FormBuilder(
           key: _formKey,
           child: Stepper(
             type: StepperType.horizontal,
             currentStep: _activeCurrentStep,
             steps: stepList(),
-            // onStepContinue takes us to the next step
             onStepContinue: () {
               if (_activeCurrentStep == stepList().length - 1) {
-                // Validate and save the form values
                 _formKey.currentState?.saveAndValidate();
                 String? formString = _formKey.currentState?.value.toString();
                 alertDialog(context, formString!);
@@ -178,7 +175,6 @@ class MyHomePageState extends State<MyHomePage> {
                 });
               }
             },
-            // onStepCancel takes us to the previous step
             onStepCancel: () {
               if (_activeCurrentStep == 0) {
                 return;
@@ -187,7 +183,6 @@ class MyHomePageState extends State<MyHomePage> {
                 _activeCurrentStep -= 1;
               });
             },
-            // onStepTap allows to directly click on the particular step we want
             onStepTapped: (int index) {
               setState(() {
                 _activeCurrentStep = index;
